@@ -96,8 +96,22 @@ TABDIR = tab/
 TSTDIR = test/
 EXADIR = examples/
 
+ifdef CROSS_COMPILE
+
 CC     = ${CROSS_COMPILE}gcc
 LINK   = ${CROSS_COMPILE}gcc
+CC_HOST    = cc
+LINK_HOST  = cc
+STRIP_HOST = strip
+AR_HOST    = ar
+
+else
+
+CC     = cc
+LINK   = cc
+
+endif
+
 RM     = /bin/rm -f
 STRIP  = ${CROSS_COMPILE}strip
 OBJEXT = .o
@@ -113,15 +127,6 @@ CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 	-Wcast-qual -Wcast-align -Wwrite-strings -Wredundant-decls \
 	-Wnested-externs -Werror -O3 \
 	-funsigned-char -I${INCDIR}
-
-ifdef CROSS_COMPILE
-
-CC_HOST    = gcc
-LINK_HOST  = gcc
-STRIP_HOST = strip
-AR_HOST    = ar
-
-endif
 
 endif
 
